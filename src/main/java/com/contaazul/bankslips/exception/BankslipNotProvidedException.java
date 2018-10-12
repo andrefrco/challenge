@@ -6,19 +6,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BankslipNotProvidedException extends RuntimeException{
 
+    private static final String MESSAGE = "Bankslip not provided in the request body";
+
     public BankslipNotProvidedException() {
-        super();
-    }
-
-    public BankslipNotProvidedException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public BankslipNotProvidedException(String message) {
-        super(message);
-    }
-
-    public BankslipNotProvidedException(Throwable cause) {
-        super(cause);
+        super(MESSAGE);
     }
 }

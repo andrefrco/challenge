@@ -24,7 +24,6 @@
 		<java.version>1.8</java.version>
 		<lombok.version>1.16.20</lombok.version>
 		<owner.version>1.0.5.1</owner.version>
-		<mapper.version>0.7.4</mapper.version>
 	</properties>
 
 	<dependencies>
@@ -53,16 +52,11 @@
 			<version>${lombok.version}</version>
         </dependency>
 		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>${mapper.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.aeonbits.owner</groupId>
 			<artifactId>owner</artifactId>
 			<version>${owner.version}</version>
 		</dependency>
-    </dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>
