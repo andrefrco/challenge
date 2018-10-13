@@ -7,4 +7,5 @@ public interface EnvironmentConfig extends Config {
 	@Config.Key("APP_STATUS")
 	@DefaultValue("OK")
 	String getStatus();
+
 }

@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -25,7 +26,7 @@ public class BankslipPersistenceDTO {
 
     @NotNull
     @JsonProperty("total_in_cents")
-    private Long priceInCents;
+    private BigDecimal priceInCents;
 
     @NotNull
     @JsonProperty("customer")

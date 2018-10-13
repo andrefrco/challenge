@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,7 +40,7 @@ public class BankslipControllerTest {
 
         BankslipPersistenceDTO bankslipPersistenceDTO = BankslipPersistenceDTO.builder()
                 .dueDate( formatterDate( "2018-01-01" ) )
-                .priceInCents( Long.valueOf(100000) )
+                .priceInCents( BigDecimal.valueOf(100000) )
                 .customer( "Trillian Company" )
                 .build();
 

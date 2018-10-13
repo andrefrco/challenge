@@ -1,4 +1,4 @@
-package com.contaazul.bankslips.controller;
+package com.contaazul.bankslips.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,6 @@ public class BankslipNotProvidedHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> bankslipNotProvidedHandler() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(MESSAGE);
+        return ResponseEntity.status( HttpStatus.BAD_REQUEST ).body( MESSAGE );
     }
 }

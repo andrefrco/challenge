@@ -1,9 +1,11 @@
 package com.contaazul.bankslips.entity;
 
 import com.contaazul.bankslips.validations.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -24,7 +26,11 @@ public class Bankslip {
 
     private Date dueDate;
 
-    private Long priceInCents;
+    private BigDecimal priceInCents;
 
     private String customer;
+
+    private BigDecimal fine;
+
+    private Date paymentDate;
 }
