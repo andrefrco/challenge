@@ -34,11 +34,11 @@ public class PersistBankslip {
         Set<ConstraintViolation<BankslipPersistenceDTO>> violations = Validation.buildDefaultValidatorFactory()
                 .getValidator().validate(bankslipPersistenceDTO);
         if (violations.size() > 0) {
-            throw new BankslipInvalidProvidedException( buildErrorReturn( violations ) );
+            throw new BankslipInvalidProvidedException( buildErrorMessage( violations ) );
         }
     }
 
-    private String buildErrorReturn(Set<ConstraintViolation<BankslipPersistenceDTO>> violations) {
+    private String buildErrorMessage(Set<ConstraintViolation<BankslipPersistenceDTO>> violations) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append( MESSAGE_INVALID_BANKSLIP );
         violations.stream().forEach(v -> {
