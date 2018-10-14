@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class FindBankslip {
 
     @Autowired
-    BankslipRepository bankslipRepository;
+    private BankslipRepository bankslipRepository;
 
     public List<BankslipDTO> findAll() {
         return bankslipRepository.findAll().stream().map( BankslipDTO::new ).collect( Collectors.toList() );

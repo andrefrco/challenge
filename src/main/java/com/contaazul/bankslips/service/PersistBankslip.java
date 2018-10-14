@@ -19,7 +19,7 @@ public class PersistBankslip {
     private static final String MESSAGE_INVALID_BANKSLIP = "Invalid bankslip provided. The possible reasons are: ";
 
     @Autowired
-    BankslipRepository bankslipRepository;
+    private BankslipRepository bankslipRepository;
 
     public Bankslip persist(BankslipPersistenceDTO bankslipPersistenceDTO) {
         validateBankslipPersistenceDTOFields(bankslipPersistenceDTO);

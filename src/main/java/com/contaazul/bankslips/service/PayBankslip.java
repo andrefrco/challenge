@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 public class PayBankslip {
 
     @Autowired
-    FindBankslip findBankslip;
+    private FindBankslip findBankslip;
 
     @Autowired
-    BankslipRepository bankslipRepository;
+    private BankslipRepository bankslipRepository;
 
     public void pay(String id, PaymentBankslipDTO paymentDTO) throws NotFoundException {
         Bankslip bankslip = findBankslip.findById( id );

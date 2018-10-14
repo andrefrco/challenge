@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 public class CancelBankslip {
 
     @Autowired
-    FindBankslip findBankslip;
+    private FindBankslip findBankslip;
 
     @Autowired
-    BankslipRepository bankslipRepository;
+    private BankslipRepository bankslipRepository;
 
     public void cancel(String id) throws NotFoundException {
         Bankslip bankslip = findBankslip.findById( id );

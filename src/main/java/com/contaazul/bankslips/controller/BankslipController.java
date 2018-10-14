@@ -16,45 +16,45 @@ import org.springframework.web.bind.annotation.*;
 public class BankslipController {
 
     @Autowired
-    PersistBankslip persistBankslip;
+    private PersistBankslip persistBankslip;
 
     @Autowired
-    FindBankslip findBankslip;
+    private FindBankslip findBankslip;
 
     @Autowired
-    FineCalculate fineCalculate;
+    private FineCalculate fineCalculate;
 
     @Autowired
-    PayBankslip payBankslip;
+    private PayBankslip payBankslip;
 
     @Autowired
-    CancelBankslip cancelBankslip;
+    private CancelBankslip cancelBankslip;
 
     @PostMapping(value = "/bankslips")
     public ResponseEntity<BankslipDTO> persist(@RequestBody BankslipPersistenceDTO bankslipPersistenceDTO) {
         Bankslip bankslipSaved = persistBankslip.persist( bankslipPersistenceDTO );
-        return new ResponseEntity( new BankslipDTO( bankslipSaved ), HttpStatus.CREATED );
+        return new ResponseEntity<>( new BankslipDTO( bankslipSaved ), HttpStatus.CREATED );
     }
 
     @GetMapping(value = "/bankslips")
     public ResponseEntity<Object> findAll() {
-        return new ResponseEntity( findBankslip.findAll(), HttpStatus.OK );
+        return new ResponseEntity<>( findBankslip.findAll(), HttpStatus.OK );
     }
 
     @GetMapping(value = "/bankslips/{id}")
     public ResponseEntity<BankslipDTO> findById(@PathVariable("id") String id) throws NotFoundException {
-        return new ResponseEntity( new BankslipDTO( fineCalculate.persistFine( id ) ), HttpStatus.OK );
+        return new ResponseEntity<>( new BankslipDTO( fineCalculate.persistFine( id ) ), HttpStatus.OK );
     }
 
     @PostMapping(value = "/bankslips/{id}/payments")
     public ResponseEntity<BankslipDTO> pay(@RequestBody PaymentBankslipDTO paymentDTO, @PathVariable("id") String id) throws NotFoundException {
         payBankslip.pay( id, paymentDTO );
-        return new ResponseEntity( HttpStatus.NO_CONTENT );
+        return new ResponseEntity<>( HttpStatus.NO_CONTENT );
     }
 
     @DeleteMapping(value = "/bankslips/{id}")
     public ResponseEntity<BankslipDTO> cancel( @PathVariable("id") String id ) throws NotFoundException {
         cancelBankslip.cancel(id);
-        return new ResponseEntity( HttpStatus.NO_CONTENT );
+        return new ResponseEntity<>( HttpStatus.NO_CONTENT );
     }
 }

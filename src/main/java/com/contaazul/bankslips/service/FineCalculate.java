@@ -24,10 +24,10 @@ public class FineCalculate {
     private static BigDecimal HIGHER_TAX = new BigDecimal("0.01");
 
     @Autowired
-    BankslipRepository bankslipRepository;
+    private BankslipRepository bankslipRepository;
 
     @Autowired
-    FindBankslip findBankslip;
+    private FindBankslip findBankslip;
 
     public Bankslip persistFine(String id) throws NotFoundException {
         Bankslip bankslip = findBankslip.findById( id );
