@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -39,7 +40,7 @@ public class BankslipControllerTest {
     }
 
     @Test
-    public void persistWhenCreated() throws Exception {
+    public void persistWhenCreatedTest() throws Exception {
         BankslipPersistenceDTO bankslipPersistenceDTO = BankslipPersistenceDTO.builder()
                 .dueDate( formatterDate( "2018-01-01" ) )
                 .priceInCents( BigDecimal.valueOf( 100000 ) )
@@ -54,7 +55,7 @@ public class BankslipControllerTest {
     }
 
     @Test
-    public void persistWhenBadRequest() throws Exception {
+    public void persistWhenBadRequestTest() throws Exception {
         BankslipPersistenceDTO bankslipPersistenceDTO = null;
 
         mockMvc.perform( post( "/rest/bankslips" )
@@ -65,7 +66,7 @@ public class BankslipControllerTest {
     }
 
     @Test
-    public void persistWhenUnprocessableEntity() throws Exception {
+    public void persistWhenUnprocessableEntityTest() throws Exception {
         BankslipPersistenceDTO bankslipPersistenceDTO = new BankslipPersistenceDTO();
 
         mockMvc.perform( post( "/rest/bankslips" )
@@ -73,5 +74,38 @@ public class BankslipControllerTest {
                 .content( formatterJson( bankslipPersistenceDTO ) ))
                 .andExpect( status().isUnprocessableEntity() );
     }
+
+    @Test
+    public void findAllTest() throws Exception {
+        mockMvc.perform( get( "/rest/bankslips")
+                .contentType( MediaType.APPLICATION_JSON ))
+                .andExpect( status().isOk() );
+    }
+
+    public void findByIdWhenOk() {
+
+    }
+
+    public void findByIdWhenNotFound() {
+
+    }
+
+    public void payWhenOk() {
+
+    }
+
+    public void payWhenWhenNotFound() {
+
+    }
+
+    public void cancelWhenOk() {
+
+    }
+
+    public void cancelWhenNotFound() {
+
+    }
+
+    //find all empty and with 2 records
 
 }

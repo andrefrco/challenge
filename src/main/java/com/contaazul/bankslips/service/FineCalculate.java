@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -38,13 +39,13 @@ public class FineCalculate {
         return bankslip;
     }
 
-    private BigDecimal calculateFine(Date dueDate, Date nowDate, BigDecimal price) {
+    public BigDecimal calculateFine(Date dueDate, Date nowDate, BigDecimal price) {
         int intervalDays = getIntervalDays( dueDate, nowDate );
         BigDecimal taxFine = getTaxFine( intervalDays );
-        return price.multiply( taxFine.multiply( BigDecimal.valueOf( intervalDays ) ) );
+        return price.multiply( taxFine.multiply( BigDecimal.valueOf( intervalDays ) ) ).setScale( 0, RoundingMode.HALF_EVEN );
     }
 
-    private int getIntervalDays(Date dueDate, Date nowDate) {
+    public int getIntervalDays(Date dueDate, Date nowDate) {
         int intervalInDays = Period.between( convertToLocalDate( dueDate ), convertToLocalDate( nowDate ) ).getDays();
         if (intervalInDays > 0) {
             return intervalInDays;
@@ -56,7 +57,7 @@ public class FineCalculate {
         return date.toInstant().atZone( ZoneId.systemDefault() ).toLocalDate();
     }
 
-    private BigDecimal getTaxFine(int intervalInDays) {
+    public BigDecimal getTaxFine(int intervalInDays) {
         if (intervalInDays < CUT_OF_DATE) {
             return LOWER_TAX;
         }
