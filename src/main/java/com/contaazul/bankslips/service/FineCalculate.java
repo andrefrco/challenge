@@ -24,7 +24,7 @@ public class FineCalculate {
     private static BigDecimal HIGHER_TAX = new BigDecimal("0.01");
 
     @Autowired
-    FindBankslip findBankslip;
+    private FindBankslip findBankslip;
 
     public BankslipDTO findDetail(String id) throws NotFoundException {
         Bankslip bankslip = findBankslip.findById( id );
@@ -35,13 +35,13 @@ public class FineCalculate {
         return new BankslipDTO( bankslip );
     }
 
-    public BigDecimal calculateFine(Date dueDate, Date nowDate, BigDecimal price) {
+    private BigDecimal calculateFine(Date dueDate, Date nowDate, BigDecimal price) {
         int intervalDays = getIntervalDays( dueDate, nowDate );
         BigDecimal taxFine = getTaxFine( intervalDays );
         return price.multiply( taxFine.multiply( BigDecimal.valueOf( intervalDays ) ) ).setScale( 0, RoundingMode.HALF_EVEN );
     }
 
-    public int getIntervalDays(Date dueDate, Date nowDate) {
+    private int getIntervalDays(Date dueDate, Date nowDate) {
         int intervalInDays = Period.between( convertToLocalDate( dueDate ), convertToLocalDate( nowDate ) ).getDays();
         if (intervalInDays > 0) {
             return intervalInDays;
@@ -53,7 +53,7 @@ public class FineCalculate {
         return date.toInstant().atZone( ZoneId.systemDefault() ).toLocalDate();
     }
 
-    public BigDecimal getTaxFine(int intervalInDays) {
+    private BigDecimal getTaxFine(int intervalInDays) {
         if (intervalInDays < CUT_OF_DATE) {
             return LOWER_TAX;
         }

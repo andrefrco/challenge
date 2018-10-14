@@ -31,12 +31,12 @@ public class BankslipControllerTest {
     private MockMvc mockMvc;
 
     private Date formatterDate(String dueDate) throws ParseException {
-        return formatter.parse(dueDate);
+        return formatter.parse( dueDate );
     }
 
     private String formatterJson(Object object) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(object);
+        return mapper.writeValueAsString( object );
     }
 
     @Test
@@ -105,7 +105,5 @@ public class BankslipControllerTest {
     public void cancelWhenNotFound() {
 
     }
-
-    //find all empty and with 2 records
 
 }
