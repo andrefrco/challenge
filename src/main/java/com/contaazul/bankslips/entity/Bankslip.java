@@ -1,7 +1,5 @@
 package com.contaazul.bankslips.entity;
 
-import com.contaazul.bankslips.validations.UUID;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +16,6 @@ import java.util.Date;
 public class Bankslip {
 
     @Id
-    @UUID
     private String id;
 
     @Enumerated(EnumType.STRING)

@@ -2,12 +2,9 @@ package com.contaazul.bankslips.controller;
 
 import com.contaazul.bankslips.dto.BankslipDTO;
 import com.contaazul.bankslips.dto.BankslipPersistenceDTO;
-import com.contaazul.bankslips.dto.PaymentDTO;
+import com.contaazul.bankslips.dto.PaymentBankslipDTO;
 import com.contaazul.bankslips.entity.Bankslip;
-import com.contaazul.bankslips.service.FindBankslip;
-import com.contaazul.bankslips.service.FineCalculate;
-import com.contaazul.bankslips.service.PayBankslip;
-import com.contaazul.bankslips.service.PersistBankslip;
+import com.contaazul.bankslips.service.*;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +27,9 @@ public class BankslipController {
     @Autowired
     PayBankslip payBankslip;
 
+    @Autowired
+    CancelBankslip cancelBankslip;
+
     @PostMapping(value = "/bankslips")
     public ResponseEntity<BankslipDTO> persist(@RequestBody BankslipPersistenceDTO bankslipPersistenceDTO) {
         Bankslip bankslipSaved = persistBankslip.persist( bankslipPersistenceDTO );
@@ -47,8 +47,14 @@ public class BankslipController {
     }
 
     @PostMapping(value = "/bankslips/{id}/payments")
-    public ResponseEntity<BankslipDTO> pay(@RequestBody PaymentDTO paymentDTO, @PathVariable("id") String id) throws NotFoundException {
+    public ResponseEntity<BankslipDTO> pay(@RequestBody PaymentBankslipDTO paymentDTO, @PathVariable("id") String id) throws NotFoundException {
         payBankslip.pay( id, paymentDTO );
+        return new ResponseEntity( HttpStatus.NO_CONTENT );
+    }
+
+    @DeleteMapping(value = "/bankslips/{id}")
+    public ResponseEntity<BankslipDTO> cancel( @PathVariable("id") String id ) throws NotFoundException {
+        cancelBankslip.cancel(id);
         return new ResponseEntity( HttpStatus.NO_CONTENT );
     }
 }
