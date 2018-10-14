@@ -15,24 +15,20 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BankslipDTO {
 
-    @JsonProperty("id")
     private final String id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @JsonProperty("due_date")
-    private final Date dueDate;
+    private final String customer;
+
+    private final String status;
+
+    private BigDecimal fine;
 
     @JsonProperty("total_in_cents")
     private final BigDecimal priceInCents;
 
-    @JsonProperty("customer")
-    private final String customer;
-
-    @JsonProperty("status")
-    private final String status;
-
-    @JsonProperty("fine")
-    private BigDecimal fine;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonProperty("due_date")
+    private final Date dueDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("payment_date")

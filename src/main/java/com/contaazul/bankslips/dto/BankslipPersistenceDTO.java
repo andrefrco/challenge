@@ -19,17 +19,16 @@ import java.util.Date;
 @NoArgsConstructor
 public class BankslipPersistenceDTO {
 
-    @NotNull
+    @NotNull(message = "Due date is required")
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("due_date")
     private Date dueDate;
 
-    @NotNull
+    @NotNull(message = "Price is required")
     @JsonProperty("total_in_cents")
     private BigDecimal priceInCents;
 
-    @NotNull
-    @JsonProperty("customer")
+    @NotNull(message = "Customer is required")
     private String customer;
 
     public Bankslip toBankSlip(String uuid, BankslipStatus status) {

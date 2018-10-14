@@ -47,14 +47,14 @@ public class BankslipController {
     }
 
     @PostMapping(value = "/bankslips/{id}/payments")
-    public ResponseEntity<BankslipDTO> pay(@RequestBody PaymentBankslipDTO paymentDTO, @PathVariable("id") String id) throws NotFoundException {
+    public HttpStatus pay(@RequestBody PaymentBankslipDTO paymentDTO, @PathVariable("id") String id) throws NotFoundException {
         payBankslip.pay( id, paymentDTO );
-        return new ResponseEntity<>( HttpStatus.NO_CONTENT );
+        return HttpStatus.NO_CONTENT;
     }
 
     @DeleteMapping(value = "/bankslips/{id}")
-    public ResponseEntity<BankslipDTO> cancel( @PathVariable("id") String id ) throws NotFoundException {
-        cancelBankslip.cancel(id);
-        return new ResponseEntity<>( HttpStatus.NO_CONTENT );
+    public HttpStatus cancel(@PathVariable("id") String id ) throws NotFoundException {
+        cancelBankslip.cancel( id );
+        return HttpStatus.NO_CONTENT;
     }
 }

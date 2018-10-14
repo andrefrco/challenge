@@ -27,7 +27,7 @@ public class FineCalculate {
     private BankslipRepository bankslipRepository;
 
     @Autowired
-    private FindBankslip findBankslip;
+    FindBankslip findBankslip;
 
     public Bankslip persistFine(String id) throws NotFoundException {
         Bankslip bankslip = findBankslip.findById( id );

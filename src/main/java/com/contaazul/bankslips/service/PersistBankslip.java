@@ -3,7 +3,7 @@ package com.contaazul.bankslips.service;
 import com.contaazul.bankslips.dto.BankslipPersistenceDTO;
 import com.contaazul.bankslips.entity.Bankslip;
 import com.contaazul.bankslips.entity.BankslipStatus;
-import com.contaazul.bankslips.exception.BankslipInvalidProvidedException;
+import com.contaazul.bankslips.exception.InvalidBankslipProvidedException;
 import com.contaazul.bankslips.repository.BankslipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class PersistBankslip {
         Set<ConstraintViolation<BankslipPersistenceDTO>> violations = Validation.buildDefaultValidatorFactory()
                 .getValidator().validate(bankslipPersistenceDTO);
         if (violations.size() > 0) {
-            throw new BankslipInvalidProvidedException( buildErrorMessage( violations ) );
+            throw new InvalidBankslipProvidedException( buildErrorMessage( violations ) );
         }
     }
 

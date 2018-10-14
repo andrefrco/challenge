@@ -12,7 +12,6 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "bankslip")
 public class Bankslip {
 
     @Id
