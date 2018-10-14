@@ -1,8 +1,8 @@
 package com.contaazul.bankslips.service;
 
+import com.contaazul.bankslips.dto.BankslipDTO;
 import com.contaazul.bankslips.entity.Bankslip;
 import com.contaazul.bankslips.entity.BankslipStatus;
-import com.contaazul.bankslips.repository.BankslipRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,19 +24,15 @@ public class FineCalculate {
     private static BigDecimal HIGHER_TAX = new BigDecimal("0.01");
 
     @Autowired
-    private BankslipRepository bankslipRepository;
-
-    @Autowired
     FindBankslip findBankslip;
 
-    public Bankslip persistFine(String id) throws NotFoundException {
+    public BankslipDTO findDetail(String id) throws NotFoundException {
         Bankslip bankslip = findBankslip.findById( id );
-        Date now = new Date();
-        bankslip.setFine( calculateFine( bankslip.getDueDate(), now, bankslip.getPriceInCents() ) );
-        bankslip.setStatus( BankslipStatus.PAID );
-        bankslip.setPaymentDate( now );
-        bankslipRepository.save( bankslip );
-        return bankslip;
+        if (bankslip.getStatus().equals( BankslipStatus.PAID )) {
+            BigDecimal fine = calculateFine( bankslip.getDueDate(), bankslip.getPaymentDate(), bankslip.getPriceInCents() );
+            return new BankslipDTO( bankslip, fine );
+        }
+        return new BankslipDTO( bankslip );
     }
 
     public BigDecimal calculateFine(Date dueDate, Date nowDate, BigDecimal price) {

@@ -2,6 +2,7 @@ package com.contaazul.bankslips.service;
 
 import com.contaazul.bankslips.dto.PaymentBankslipDTO;
 import com.contaazul.bankslips.entity.Bankslip;
+import com.contaazul.bankslips.entity.BankslipStatus;
 import com.contaazul.bankslips.repository.BankslipRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class PayBankslip {
     public void pay(String id, PaymentBankslipDTO paymentDTO) throws NotFoundException {
         Bankslip bankslip = findBankslip.findById( id );
         bankslip.setPaymentDate( paymentDTO.getPaymentDate() );
+        bankslip.setStatus( BankslipStatus.PAID );
         bankslipRepository.save(bankslip);
     }
 

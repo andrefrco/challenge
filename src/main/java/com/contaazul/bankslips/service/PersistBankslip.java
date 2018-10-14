@@ -22,7 +22,7 @@ public class PersistBankslip {
     private BankslipRepository bankslipRepository;
 
     public Bankslip persist(BankslipPersistenceDTO bankslipPersistenceDTO) {
-        validateBankslipPersistenceDTOFields(bankslipPersistenceDTO);
+        validateBankslipPersistenceDTOFields( bankslipPersistenceDTO );
         return bankslipRepository.save( convertToEntity( bankslipPersistenceDTO ) );
     }
 

@@ -43,18 +43,18 @@ public class BankslipController {
 
     @GetMapping(value = "/bankslips/{id}")
     public ResponseEntity<BankslipDTO> findById(@PathVariable("id") String id) throws NotFoundException {
-        return new ResponseEntity<>( new BankslipDTO( fineCalculate.persistFine( id ) ), HttpStatus.OK );
+        return new ResponseEntity<>( fineCalculate.findDetail( id ), HttpStatus.OK );
     }
 
     @PostMapping(value = "/bankslips/{id}/payments")
-    public HttpStatus pay(@RequestBody PaymentBankslipDTO paymentDTO, @PathVariable("id") String id) throws NotFoundException {
+    public ResponseEntity<BankslipDTO> pay(@RequestBody PaymentBankslipDTO paymentDTO, @PathVariable("id") String id) throws NotFoundException {
         payBankslip.pay( id, paymentDTO );
-        return HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>( HttpStatus.NO_CONTENT );
     }
 
     @DeleteMapping(value = "/bankslips/{id}")
-    public HttpStatus cancel(@PathVariable("id") String id ) throws NotFoundException {
+    public ResponseEntity<BankslipDTO> cancel(@PathVariable("id") String id ) throws NotFoundException {
         cancelBankslip.cancel( id );
-        return HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>( HttpStatus.NO_CONTENT );
     }
 }

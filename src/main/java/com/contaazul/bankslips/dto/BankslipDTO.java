@@ -40,7 +40,16 @@ public class BankslipDTO {
         this.priceInCents = bankslip.getPriceInCents();
         this.customer = bankslip.getCustomer();
         this.status = String.valueOf(bankslip.getStatus());
-        this.fine = bankslip.getFine();
         this.paymentDate = bankslip.getPaymentDate();
+    }
+
+    public BankslipDTO(Bankslip bankslip, BigDecimal fine) {
+        this.id = bankslip.getId();
+        this.dueDate = bankslip.getDueDate();
+        this.priceInCents = bankslip.getPriceInCents();
+        this.customer = bankslip.getCustomer();
+        this.status = String.valueOf(bankslip.getStatus());
+        this.paymentDate = bankslip.getPaymentDate();
+        this.fine = fine;
     }
 }

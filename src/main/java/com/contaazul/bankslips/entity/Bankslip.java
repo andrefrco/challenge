@@ -26,7 +26,5 @@ public class Bankslip {
 
     private String customer;
 
-    private BigDecimal fine;
-
     private Date paymentDate;
 }
