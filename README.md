@@ -23,7 +23,8 @@ No final do desafio vamos ter os seguintes endpoints para:
 
 ### Heroku
 
-- A aplicação também se encontra disponível no Heroku no seguinte link: https://challengecontaazul.herokuapp.com/
+- A aplicação também se encontra disponível no Heroku no seguinte link: https://challengecontaazul.herokuapp.com/.
+- O primeiro acesso pode demorar um pouco, pois o app fica hibernado.
 
 ## Funcionalidades
 
@@ -31,8 +32,8 @@ No final do desafio vamos ter os seguintes endpoints para:
 
 ### Criar Boleto
 
-Endpoint: rest/bankslips
-Método: POST
+- Endpoint: rest/bankslips
+- Method: POST
 
 ```json
 {
@@ -45,18 +46,18 @@ Método: POST
 
 ### Lista de boletos
 
-Endpoint: rest/bankslips/
-Método: GET
+- Endpoint: rest/bankslips/
+- Method: GET
 
 ### Detalhe do boleto
 
-Endpoint: rest/bankslips/{id}
-Método: GET
+- Endpoint: rest/bankslips/{id}
+- Method: GET
 
 ### Pagar boleto
 
-Endpoint: rest/bankslips/{id}/payments
-Método: POST
+- Endpoint: rest/bankslips/{id}/payments
+- Method: POST
 
 ```json
 {
@@ -66,5 +67,5 @@ Método: POST
 
 ### Cancelar boleto
 
-Endpoint: rest/bankslips/{id}
-Método: DELETE
+- Endpoint: rest/bankslips/{id}
+- Method: DELETE
