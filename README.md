@@ -1,3 +1,5 @@
+[![travis](https://travis-ci.org/andrefrco/challenge.svg?branch=master)](https://travis-ci.org/andrefrco/challenge)
+
 # Desafio Desenvolvedor Backend - ContaAzul
 
 O objetivo do desafio é construir uma API REST para geração de boletos que será consumido por um módulo de um sistema de gestão financeira de microempresas.
@@ -14,6 +16,7 @@ No final do desafio vamos ter os seguintes endpoints para:
 - Maven
 - H2
 - Spring Boot
+- O app está hospedado no [Heroku](https://www.heroku.com/) e está configurada a integração contínua com o [Travis](https://travis-ci.org/)
 
 ## Execução
 ### Local
