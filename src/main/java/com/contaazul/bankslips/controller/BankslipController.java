@@ -43,7 +43,7 @@ public class BankslipController {
 
     @GetMapping(value = "/bankslips/{id}")
     public ResponseEntity<BankslipDTO> findById(@PathVariable("id") String id) throws NotFoundException {
-        return new ResponseEntity<>( fineCalculate.findDetail( id ), HttpStatus.OK );
+        return new ResponseEntity<>( fineCalculate.findDetail( findBankslip.findById( id ) ), HttpStatus.OK );
     }
 
     @PostMapping(value = "/bankslips/{id}/payments")

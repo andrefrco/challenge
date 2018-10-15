@@ -1,6 +1,8 @@
 package com.contaazul.bankslips.controller;
 
+import com.contaazul.bankslips.config.Application;
 import com.contaazul.bankslips.dto.BankslipPersistenceDTO;
+import com.contaazul.bankslips.service.PayBankslip;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -14,21 +16,26 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = Application.class)
 public class BankslipControllerTest {
 
     private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    PayBankslip payBankslip;
 
     private Date formatterDate(String dueDate) throws ParseException {
         return formatter.parse( dueDate );
@@ -82,28 +89,25 @@ public class BankslipControllerTest {
                 .andExpect( status().isOk() );
     }
 
-    public void findByIdWhenOk() {
-
+    @Test
+    public void findByIdWhenNotFound() throws Exception {
+        mockMvc.perform( get( "/rest/bankslips/" + UUID.randomUUID().toString())
+                .contentType( MediaType.APPLICATION_JSON ))
+                .andExpect( status().isNotFound() );
     }
 
-    public void findByIdWhenNotFound() {
-
+    @Test
+    public void payNotFound() throws Exception {
+        mockMvc.perform( get( "/rest/bankslips/" + UUID.randomUUID().toString() + "/payments")
+                .contentType( MediaType.APPLICATION_JSON ))
+                .andExpect( status().isMethodNotAllowed() );
     }
 
-    public void payWhenOk() {
-
-    }
-
-    public void payWhenWhenNotFound() {
-
-    }
-
-    public void cancelWhenOk() {
-
-    }
-
-    public void cancelWhenNotFound() {
-
+    @Test
+    public void cancelNotFound() throws Exception {
+        mockMvc.perform( delete( "/rest/bankslips/" + UUID.randomUUID().toString())
+                .contentType( MediaType.APPLICATION_JSON ))
+                .andExpect( status().isNotFound() );
     }
 
 }

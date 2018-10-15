@@ -3,8 +3,6 @@ package com.contaazul.bankslips.service;
 import com.contaazul.bankslips.dto.BankslipDTO;
 import com.contaazul.bankslips.entity.Bankslip;
 import com.contaazul.bankslips.entity.BankslipStatus;
-import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -23,11 +21,7 @@ public class FineCalculate {
 
     private static BigDecimal HIGHER_TAX = new BigDecimal("0.01");
 
-    @Autowired
-    private FindBankslip findBankslip;
-
-    public BankslipDTO findDetail(String id) throws NotFoundException {
-        Bankslip bankslip = findBankslip.findById( id );
+    public BankslipDTO findDetail(Bankslip bankslip) {
         if (bankslip.getStatus().equals( BankslipStatus.PAID )) {
             BigDecimal fine = calculateFine( bankslip.getDueDate(), bankslip.getPaymentDate(), bankslip.getPriceInCents() );
             return new BankslipDTO( bankslip, fine );
